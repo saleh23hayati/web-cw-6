@@ -1,25 +1,20 @@
-// دالة لتثبيت الوضع الليلي أو النهاري
-function setTheme(themeName) {
-  localStorage.setItem("theme", themeName);
-  document.documentElement.className = themeName;
-}
 
-// دالة للانتقال بين الوضعين
-function toggleTheme() {
-  if (localStorage.getItem("theme") === "theme-dark") {
-    setTheme("theme-light");
-  } else {
-    setTheme("theme-dark");
-  }
+const toggleSwitch =
+    document.querySelector('.theme-slider input[type="checkbox"]');
+ 
+/* Function to change theme */
+function switchTheme(e) {
+ 
+    /* Once checkbox is checked default theme change to dark */
+    if (e.target.checked) {
+        document.documentElement.setAttribute('theme', 'dark');
+    }
+ 
+    /* While page in dark mode and checkbox is
+    checked then theme back to change light*/
+    else {
+        document.documentElement.setAttribute('theme', 'light');
+    }
 }
-
-// الوضع الافتراضي
-(function () {
-  if (localStorage.getItem("theme") === "theme-dark") {
-    setTheme("theme-dark");
-    document.getElementById("slider").checked = false;
-  } else {
-    setTheme("theme-light");
-    document.getElementById("slider").checked = true;
-  }
-})();
+ 
+toggleSwitch.addEventListener('change', switchTheme, false);
